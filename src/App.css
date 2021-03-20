@@ -205,8 +205,12 @@ body {
   margin: auto;
 }
 
-.music-player-song {
+.music-player-info {
   width: 16%;
+}
+
+.music-player-controls {
+  width: 30%;
 }
 
 .skip-button  {
