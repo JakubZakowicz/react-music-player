@@ -4,20 +4,13 @@ import { songs } from '../songs.js'
 
 function MusicPlayer() {
 
-    const { setIsMusicPlayer } = useContext(GlobalState)
+    const { setIsMusicPlayer, songIndex, setSongIndex } = useContext(GlobalState)
     const music = useRef(null)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [songIndex, setSongIndex] = useState(0)
-    const [musicCurrentTime, setMusicCurrentTime] = useState(0)
-    const [musicTotalTime, setMusicTotalTime] = useState(0)
-    const [sliderPosition, setSliderPosition] = useState(0)
+    const [musicCurrentTime, setMusicCurrentTime] = useState('0.00')
+    const [musicDuration, setMusicDuration] = useState(0)
+    const [musicVolume, setMusicVolume] = useState(0.2)
     const [isMuted, setIsMuted] = useState(false)
-
-    function songInit(e) {
-        console.log(e.target)
-        console.log(e.target.duration)
-        setMusicTotalTime(setTime(music.current.duration))
-    }
 
     useEffect(() => {
         if(isPlaying) {
@@ -29,15 +22,16 @@ function MusicPlayer() {
     
     const song = songs[songIndex]
 
-    function changeVolume(e) {
-        let volume = e.target.value/100
-        music.current.volume = volume
+    function changeVolume(vol) {
+        setMusicVolume(vol)
+        music.current.volume = vol
+        if(vol === 0) setIsMuted(true)
+        else setIsMuted(false)
     }
 
     function changeDuration(e) {
         let duration = e.target.value
         music.current.currentTime = music.current.duration / 100 * duration
-        console.log(music.current.duration)
     }
 
     function previousSong() {
@@ -56,23 +50,41 @@ function MusicPlayer() {
         }
     }
 
-    if(music.current !== null && isPlaying) {
-        setInterval(() => {
-            setSliderPosition(sliderPosition + 1)
-            setMusicCurrentTime(setTime(music.current.currentTime))
-        }, 1000)
-    }
-
     function setTime(time) {
         let seconds = Math.floor(time % 60)
+        if(seconds < 10) seconds = '0' + seconds
         let minutes = Math.floor(time / 60)
         return minutes + ':' + seconds
     }
 
+    function checkSound() {
+        if(isMuted) return <i className="fas fa-volume-mute"></i>
+
+        if(musicVolume < 0.5) return <i className="fas fa-volume-down"></i>
+
+        return <i className="fas fa-volume-up"></i>
+    }
+    
+    const durationSlider = document.getElementById('duration-slider')
+    function changeCurrentTime(e) {
+        setMusicCurrentTime(setTime(e.target.currentTime))
+        durationSlider.value = e.target.currentTime / e.target.duration * 100
+    }
+
+    function initialControls(e) {
+        setMusicDuration(setTime(e.target.duration))
+        music.current.volume = musicVolume
+    }
 
     return (
         <div className="music-player music-player-center">
-            <audio id='audio' src={song.music_src} ref={music} />
+            <audio 
+                src={song.music_src} 
+                ref={music}
+                onTimeUpdate={changeCurrentTime}
+                onCanPlay={initialControls}
+                onEnded={nextSong}
+            />
             <div className="music-width music-player-center justify-content-between">
                 <div className="music-player-info music-player-center justify-content-center">
                     <img src={song.music_img} width="60" height="60" className="rounded-3" alt="music_image" />
@@ -83,33 +95,30 @@ function MusicPlayer() {
                 </div>
 
                 <div className="duration-slider w-25 ms-5">
-                    <input type="range" min="0" max="100" defaultValue="0" className="w-100" onChange={changeDuration} />
+                    <input id="duration-slider" type="range" min="0" max="100" defaultValue={musicDuration} className="w-100" onChange={changeDuration} />
                 </div>
 
                 <div className="music-player-controls music-player-center justify-content-between">
                     <div>
                         <button className="skip-button" onClick={previousSong}><i className="fas fa-backward" ></i></button>
                         <button id="play" className="skip-button" onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ?<i className="fas fa-pause"></i> :<i className="fas fa-play"></i>}</button>
-                        <button className="skip-button" onClick={nextSong}><i className="fas fa-forward" ></i></button>
-                        
+                        <button className="skip-button" onClick={nextSong}><i className="fas fa-forward"></i></button>
                     </div>
-                    <span onLoadStart={songInit}>
-                        {(musicCurrentTime !== null) ?musicCurrentTime : 0.0} / 
-                        {musicTotalTime}
+                    <span>
+                        {musicCurrentTime} / {musicDuration}
                     </span>
                     <span>
-                        <i className="fas fa-volume-up"></i>
+                        {/* <i className="fas fa-volume-up"></i> */}
+                        {checkSound()}
                     </span>
                     <div>
-                        <input type="range" min="0" max="100" defaultValue="100" onChange={changeVolume} />
+                        <input type="range" min="0" max="100" defaultValue={musicVolume} onChange={(e) => changeVolume(e.target.value / 100)} />
                     </div>
                 </div>
             </div>
 
             <span className="close-icon" onClick={() => setIsMusicPlayer(false)}><i className="fas fa-times"></i></span>
-        </div>
-
-            
+        </div>     
     )
 }
 

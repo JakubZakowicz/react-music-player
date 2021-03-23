@@ -1,22 +1,23 @@
 import React, { useContext } from 'react'
 import { GlobalState } from '../App'
 
-function MusicListItem() {
+function MusicListItem({ song, index }) {
 
-    const { setIsMusicPlayer } = useContext(GlobalState)
+    const { isMusicPlayer, setIsMusicPlayer, setSongIndex } = useContext(GlobalState)
 
     function playAudio() {
-        setIsMusicPlayer({state: true, src: ''})
+        if(!isMusicPlayer) setIsMusicPlayer({state: true, src: ''})
+        setSongIndex(index)
     }
 
     return (
         <li className="music-list-item" onClick={playAudio}>
             <div className="row w-100 justify-content-between">
                 <div className="col-1 d-flex align-items-center">
-                    <img className="music-img" src={`${process.env.PUBLIC_URL}/images/img1.jpg`} alt="unstoppable" width="50" height="50" />
+                    <img className="music-img" src={song.music_img} alt="unstoppable" width="50" height="50" />
                     <div className="ms-4 music-item-title">
-                        <h5>Unstoppable</h5>
-                        <p>The Score</p>
+                        <h5>{song.title}</h5>
+                        <p>{song.artist}</p>
                     </div>
                 </div>
                 <div className="col-2 d-flex justify-content-between align-items-center">

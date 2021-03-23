@@ -19,7 +19,7 @@ function App() {
 
   const [isMusicPlayer, setIsMusicPlayer] = useState({state: false, src: null})
   const [isAddForm, setIsAddForm] = useState(false)
-
+  const [songIndex, setSongIndex] = useState(0)
   const [musicItems, setMusicItems] = useState([])
 
   return (
@@ -30,7 +30,9 @@ function App() {
           setIsMusicPlayer, 
           setIsAddForm,
           musicItems,
-          setMusicItems
+          setMusicItems,
+          songIndex,
+          setSongIndex
         }} >
           <Menu items={items} />
           <Screen />

@@ -13,7 +13,7 @@ export const songs = [
     },
     {
         music_src: `${process.env.PUBLIC_URL}/songs/song3.mp3`,
-        title: 'Im so osrry',
+        title: 'Im so sorry',
         artist: 'Imagine Dragons',
         music_img: `${process.env.PUBLIC_URL}/images/img3.jpg`
     }
