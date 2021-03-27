@@ -5,6 +5,7 @@ import Screen from './Components/Screen'
 import AddPlaylist from './Components/AddPlaylist'
 import MusicPlayer from './Components/MusicPlayer'
 import MusicForm from './Components/MusicForm'
+import MenuBars from './Components/MenuBars'
 
 export const GlobalState = React.createContext()
 
@@ -19,6 +20,7 @@ function App() {
 
   const [isMusicPlayer, setIsMusicPlayer] = useState({state: false, src: null})
   const [isAddForm, setIsAddForm] = useState(false)
+  const [isMenu, setIsMenu] = useState(false)
   const [songIndex, setSongIndex] = useState(0)
   const [musicItems, setMusicItems] = useState([])
 
@@ -34,7 +36,7 @@ function App() {
           songIndex,
           setSongIndex
         }} >
-          <Menu items={items} />
+          <Menu items={items} isMenu={isMenu} />
           <Screen />
       
           { playlistForm 
@@ -49,18 +51,16 @@ function App() {
             }
 
           { isMusicPlayer.state 
-            ? 
-              <MusicPlayer src={isMusicPlayer.src} /> 
-            :
-              <></> 
-            }
+            ? <MusicPlayer src={isMusicPlayer.src} /> 
+            : <></> 
+          }
 
           { isAddForm 
-            ?
-              <MusicForm />
-            :
-              <></>
+            ? <MusicForm />
+            :<></> 
           }
+
+          <MenuBars setIsMenu={setIsMenu} />
           
       </GlobalState.Provider> 
     </div>

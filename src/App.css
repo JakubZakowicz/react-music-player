@@ -13,7 +13,7 @@
 }
 
 body {
-  background:var(--purple);
+  background: var(--purple);
 }
 
 .app {
@@ -24,7 +24,7 @@ body {
 .menu {
   background: var(--light-purple);
   width: 15%;
-  min-width: 160px;
+  min-width: 200px;
   height: 100vh;
   color: var(--lighter-purple);
   padding-left: 1.5%;
@@ -45,12 +45,12 @@ body {
   padding-bottom: 10px;
 }
 
-.menu-list li:hover {
+.menu-list li span:hover {
   color: var(--red);
 }
 
 .menu-list i {
-  padding-right: 10%;
+  padding-right: 10px;
 }
 
 .menu-list span {
@@ -82,7 +82,11 @@ body {
   padding: 15px;
   background: var(--light-purple);
   border-radius: 10px;
-  width: 40%;
+  width: 40%; 
+}
+
+.add-playlist-background {
+  z-index: 15;
 }
 
 .add-playlist-button {
@@ -142,6 +146,7 @@ body {
   border-radius: 10px;
   padding: 10px;
   font-weight: bold;
+  min-width: 130px;
 }
 
 .music-img {
@@ -260,4 +265,59 @@ body {
   color: var(--lighter-purple);
   font-size: 35px;
   padding: 5px;
+}
+
+/* Menu Bars  */
+.menu-bars {
+  display: none;
+  position: absolute;
+  left: 15px;
+  font-size: 30px;
+  color: var(--lighter-purple);
+  cursor: pointer;
+  z-index: 10;
+}
+
+@media(max-width: 991px) {
+
+  .add-icon {
+    display: none;
+  }
+
+  .add-button {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .add-playlist {
+    width: 80%;
+  }
+
+  .menu {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    transition: all 0.3 ease-in-out;
+    text-align: center;
+  }
+
+  .menu-list-header h3 {
+    margin-left: 25%;
+  }
+
+  .hide {
+    left: -100%;
+  }
+
+  .menu-bars {
+    display: block;
+  }
+
+  .music-width {
+    flex-direction: column;
+  }
+
+  .duration-slider {
+    width: 90%;
+  }
 }

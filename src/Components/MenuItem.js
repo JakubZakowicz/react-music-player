@@ -4,8 +4,10 @@ import React from 'react'
 function MenuItem({ item }) {
     return (
         <li>
-            <i className="fas fa-headphones"></i>
-            <span>{item}</span>
+            <span>
+                <i className="fas fa-headphones"></i>
+                {item}
+            </span>
         </li>
     )
 }
