@@ -208,14 +208,6 @@ body {
   margin: auto;
 }
 
-.music-player-info {
-  width: 16%;
-}
-
-.music-player-controls {
-  width: 30%;
-}
-
 .skip-button  {
   border: 2px solid #fff;
   border-radius: 50%;
@@ -319,5 +311,10 @@ body {
 
   .duration-slider {
     width: 90%;
+  }
+
+  .music-player {
+    height: 200px;
+    padding: 10px;
   }
 }

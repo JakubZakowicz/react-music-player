@@ -85,8 +85,8 @@ function MusicPlayer() {
                 onCanPlay={initialControls}
                 onEnded={nextSong}
             />
-            <div className="music-width music-player-center justify-content-between">
-                <div className="music-player-info music-player-center justify-content-center">
+            <div className="music-width row music-player-center justify-content-around">
+                <div className="music-player-info col-lg-2 music-player-center justify-content-center">
                     <img src={song.music_img} width="60" height="60" className="rounded-3" alt="music_image" />
                     <div className="ms-4">
                         <h5 className="font-weight-bold">{song.title}</h5>
@@ -94,25 +94,27 @@ function MusicPlayer() {
                     </div>
                 </div>
 
-                <div className="duration-slider w-25 ms-5">
+                <div className="duration-slider col-lg-4">
                     <input id="duration-slider" type="range" min="0" max="100" defaultValue={musicDuration} className="w-100" onChange={changeDuration} />
                 </div>
 
-                <div className="music-player-controls music-player-center justify-content-between">
-                    <div>
-                        <button className="skip-button" onClick={previousSong}><i className="fas fa-backward" ></i></button>
-                        <button id="play" className="skip-button" onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ?<i className="fas fa-pause"></i> :<i className="fas fa-play"></i>}</button>
-                        <button className="skip-button" onClick={nextSong}><i className="fas fa-forward"></i></button>
-                    </div>
-                    <span>
-                        {musicCurrentTime} / {musicDuration}
-                    </span>
-                    <span>
-                        {/* <i className="fas fa-volume-up"></i> */}
-                        {checkSound()}
-                    </span>
-                    <div>
-                        <input type="range" min="0" max="100" defaultValue={musicVolume} onChange={(e) => changeVolume(e.target.value / 100)} />
+                <div className="music-player-controls col-lg-4">
+                    <div className="row music-player-center">
+                        <div className="col-lg-4">
+                            <button className="skip-button" onClick={previousSong}><i className="fas fa-backward" ></i></button>
+                            <button id="play" className="skip-button" onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ?<i className="fas fa-pause"></i> :<i className="fas fa-play"></i>}</button>
+                            <button className="skip-button" onClick={nextSong}><i className="fas fa-forward"></i></button>
+                        </div>
+                        <span className="col-lg-3">
+                            {musicCurrentTime} / {musicDuration}
+                        </span>
+                        <span className="col-lg-1">
+                            {/* <i className="fas fa-volume-up"></i> */}
+                            {checkSound()}
+                        </span>
+                        <div className="col-lg-1">
+                            <input type="range" min="0" max="100" defaultValue={musicVolume} onChange={(e) => changeVolume(e.target.value / 100)} />
+                        </div>
                     </div>
                 </div>
             </div>
