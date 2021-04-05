@@ -1,0 +1,39 @@
+/* Music List */
+.music-img {
+    border-radius: 10px;
+  }
+  
+  .music-list {
+    color: var(--white);
+  }
+  
+  /* Music List Item */
+  .music-list-item {
+    border-radius: 10px;
+    padding: 12px;
+    transition: all .2s ease-in-out;
+  }
+  
+  .music-list-item:hover {
+    background: #4b4b73;
+    cursor: pointer;
+  }
+  
+  .music-list-item:hover .music-list-icon {
+    background: #6c6c94;
+  }
+  
+  .music-item-title {
+    line-height: .75;
+  }
+  
+  .music-list-icon {
+    background: #414068;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+    width: 31px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

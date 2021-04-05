@@ -1,10 +1,9 @@
 import React from 'react'
 
-
 function MenuItem({ item }) {
     return (
-        <li>
-            <span>
+        <li className="pb-2">
+            <span className="text-capitalize">
                 <i className="fas fa-headphones"></i>
                 {item}
             </span>

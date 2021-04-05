@@ -1,0 +1,112 @@
+/* Music Player */
+.music-player {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 120px;
+    width: 100vw;
+    background: #373754;
+    color: #fff;
+  }
+  
+  .music-player-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .music-width {
+    width: 95%;
+    margin: auto;
+  }
+  
+  .skip-button  {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    padding: 7px;
+    background: transparent;
+    color: #fff;
+    margin-left: 10px;
+    width: 40px;
+  }
+  
+  .close-icon {
+    position: absolute;
+    top: -10%;
+    right: 0;
+    color: var(--lighter-purple);
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  /* Music form */
+  .music-form {
+    background: var(--light-purple);
+    color: var(--lighter-purple);
+    padding: 30px;
+    border-radius: 10px;
+  }
+  
+  .form-label {
+    margin-top: 30px;
+    margin-bottom: 0px;
+  }
+  
+  .music-form-alert {
+    display: none;
+  }
+  
+  .input small {
+    position: absolute;
+  }
+  
+  .music-form-close-icon {
+    position: absolute;
+    top: -4%;
+    right: -4%;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--lighter-purple);
+    font-size: 35px;
+    padding: 5px;
+  }
+
+  /* Adding playlist */
+.add-playlist {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    background: var(--light-purple);
+    border-radius: 10px;
+    width: 40%; 
+  }
+  
+  .add-playlist-background {
+    z-index: 15;
+  }
+  
+  .add-playlist-button {
+    background: var(--lighter-purple);
+    color: var(--purple);
+    font-weight: bold;
+  }
+
+  @media(max-width: 991px) {
+    .music-width {
+      flex-direction: column;
+    }
+  
+    .duration-slider {
+      width: 90%;
+    }
+  
+    .music-player {
+      height: 200px;
+      padding: 10px;
+    }
+
+    .add-playlist {
+      width: 80%;
+    }
+  }
