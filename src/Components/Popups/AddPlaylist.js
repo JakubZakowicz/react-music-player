@@ -4,20 +4,20 @@ import { TOGGLE_PLAYLIST_FORM } from '../../Actions/PopupActions'
 import { ADD_PLAYLIST_ITEM } from '../../Actions/ItemsActions'
 import './PopupsStyles.css'
 
-function AddPlaylist({ dispatch }) {
+function AddPlaylist({ closePlaylistForm, addPlaylistItem }) {
 
     function hidePlaylistForm(e) { 
-        if(e.target.tagName === 'DIV') dispatch({ type: TOGGLE_PLAYLIST_FORM, payload: { state: false } })
+        if(e.target.tagName === 'DIV') closePlaylistForm()
     }
 
     function handleSubmit(e) {
         e.preventDefault()
         const input = document.getElementById('input')
         if(input.value !== '') {
-            dispatch({ type: ADD_PLAYLIST_ITEM, payload: { item: input.value } })
+            addPlaylistItem(input.value)
             input.value=''
         }
-        dispatch({ type: TOGGLE_PLAYLIST_FORM, payload: { state: false }})
+        closePlaylistForm()
     }
     
     return (
@@ -31,4 +31,11 @@ function AddPlaylist({ dispatch }) {
     )
 }
 
-export default connect() (AddPlaylist)
+function mapDispatchToProps(dispatch) {
+    return {
+        closePlaylistForm: () => dispatch({ type: TOGGLE_PLAYLIST_FORM, payload: { state: false } }),
+        addPlaylistItem: val => dispatch({ type: ADD_PLAYLIST_ITEM, payload: { item: val } })
+    }
+}
+
+export default connect(null, mapDispatchToProps) (AddPlaylist)

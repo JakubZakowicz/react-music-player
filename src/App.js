@@ -8,10 +8,9 @@ function App() {
 
   return (
     <div className="app">
-    <Provider store={store}>
-        <MainView /> 
-    </Provider>
-      
+      <Provider store={store}>
+          <MainView /> 
+      </Provider>
     </div>
   );
 }

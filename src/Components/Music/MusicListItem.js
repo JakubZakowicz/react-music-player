@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { TOGGLE_MUSIC_PLAYER } from '../../Actions/PopupActions'
 
-function MusicListItem({ song, songIndex, dispatch }) {
+function MusicListItem({ song, songIndex, openMusicPlayer }) {
 
     return (
-        <li className="music-list-item" onClick={() => dispatch({ type: TOGGLE_MUSIC_PLAYER, payload: { state: true, index: songIndex } })}>
+        <li className="music-list-item" onClick={() => openMusicPlayer(songIndex)}>
             <div className="row w-100 justify-content-between">
                 <div className="col-6 d-flex align-items-center">
                     <img className="music-img" src={song.music_img} alt="unstoppable" width="50" height="50" />
@@ -24,4 +24,10 @@ function MusicListItem({ song, songIndex, dispatch }) {
     )
 }
 
-export default connect() (MusicListItem)
+function mapDispatchToProps(dispatch) {
+    return {
+        openMusicPlayer: index => dispatch({ type: TOGGLE_MUSIC_PLAYER, payload: { state: true, index } })
+    }
+}
+
+export default connect(null, mapDispatchToProps) (MusicListItem)

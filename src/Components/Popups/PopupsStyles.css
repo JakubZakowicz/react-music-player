@@ -1,12 +1,14 @@
 /* Music Player */
 .music-player {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     height: 120px;
     width: 100vw;
     background: #373754;
     color: #fff;
+    overflow: hidden;
+    z-index: 10;
   }
   
   .music-player-center {

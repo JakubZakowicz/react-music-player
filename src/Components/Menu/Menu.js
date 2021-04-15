@@ -3,10 +3,10 @@ import MenuList from './MenuList'
 import './MenuStyles.css'
 import { connect } from 'react-redux'
 
-function Menu({ isMenu, menuItems }) {
-    
+function Menu({ menuItems }) {
+
     return (
-        <div className={`menu ${isMenu ? "" : "hide"}`}>
+        <div className="menu">
             <MenuList name={'Menu'} items={menuItems.menu} />
             <MenuList name={'My music'} items={menuItems.myMusic} />
             <MenuList name={'Playlists'} items={menuItems.playlists} />
@@ -15,9 +15,8 @@ function Menu({ isMenu, menuItems }) {
 }
 
 const mapStateToProps = (store) => {
-    const { isMenu } = store.PopupReducer
     const { menuItems } = store.ItemsReducer
-    return { isMenu, menuItems }
+    return { menuItems }
 }
 
 export default connect(mapStateToProps) (Menu)

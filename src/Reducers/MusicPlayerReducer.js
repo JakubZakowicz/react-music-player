@@ -38,7 +38,7 @@ function MusicPlayerReducer(state = initialStore, action) {
         case TOGGLE_MUTED: 
             return { ...state, isMuted: action.payload.state }
         case CHANGE_CURRENT_TIME:
-            return { ...state, currentTime: action.payload.time }
+            return { ...state, currentTime: action.payload.currentTime }
         case CHANGE_DURATION:
             return { ...state, duration: action.payload.duration }
         case CHANGE_VOLUME:

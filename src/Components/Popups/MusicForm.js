@@ -3,7 +3,7 @@ import './PopupsStyles.css'
 import { connect } from 'react-redux'
 import { TOGGLE_ADD_FORM } from '../../Actions/PopupActions'
 
-function MusicForm({ dispatch }) {
+function MusicForm({ closeMusicForm }) {
 
     function validate(e) {
         e.preventDefault()
@@ -34,7 +34,7 @@ function MusicForm({ dispatch }) {
         }
 
         if(canSubmit) {
-            dispatch({ type: TOGGLE_ADD_FORM, payload: { state: false } })
+            closeMusicForm()
         }
     }
 
@@ -63,7 +63,7 @@ function MusicForm({ dispatch }) {
                 <input type="file" className="form-control mb-4" id="image-file" accept="image/*"></input>
                 <input type="submit" className="form-control mt-4" value="Add Music" />
 
-                <span className="music-form-close-icon" onClick={() => dispatch({ type: TOGGLE_ADD_FORM, payload: { state: false } })}>
+                <span className="music-form-close-icon" onClick={closeMusicForm}>
                     <i className="fas fa-times-circle"></i>
                 </span>
             </form> 
@@ -71,4 +71,10 @@ function MusicForm({ dispatch }) {
     )
 }
 
-export default connect() (MusicForm)
+function mapDispatchToProps(dispatch) {
+    return {
+        closeMusicForm: () => dispatch({ type: TOGGLE_ADD_FORM, payload: { state: false } })
+    }
+}
+
+export default connect(null, mapDispatchToProps) (MusicForm)
